@@ -19,4 +19,9 @@ open cypress dashboard
 npx cypress open
 ```
 
+## Link Video 
+Link video dapat diakses melalui link berikut: https://www.youtube.com/watch?v=msn_Uj4OfMM
+
+Link test scenario dapat diakses melalui link berikut: https://docs.google.com/spreadsheets/d/1BeU5oHqIu_Zf3fGb6LV9Xi2Z6D_6rDKA4-URluNx-JA/edit?usp=sharing 
+
 ### Thanks
