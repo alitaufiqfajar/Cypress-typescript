@@ -29,6 +29,15 @@ export class BiodataPage{
     response_whatsapp_too_long_id = "#resNoLebih"
     response_whatsapp_too_long_txt = " Karakter melebihi Format No telp"
 
+    select_kota_domisili = "#kota_domisili"
+    select2_container_kota_domisili = "#select2-kota_domisili-container"
+    select2_result_kota_domisili = "#select2-kota_domisili-results"
+    select2_result_option = ".select2-results__option"
+
+    select_jenis_layanan = "#jenis_bimbel"
+    select2_container_jenis_layanan = "#select2-jenis_bimbel-container"
+    select2_result_jenis_layanan = "#select2-jenis_bimbel-results"
+
     navigate(url: string){
         cy.visit(url)
     }
@@ -56,10 +65,19 @@ export class BiodataPage{
         cy.get(this.select_agama).should('have.value', index)
     }
     
+    label_div_jurusan = "#div_input_jurusan"
     selectKelas(kelas : string, index: number){
         cy.get(this.select2_container_kelas).click({force:true})
         cy.contains(`#select2-kelas-results > ${this.select2_result_kelas}`, kelas).click()
         cy.get(this.select_kelas).should('have.value', index)
+
+        // jika kelas 10 s/d 12 maka munculkan pemilihan jurusan
+        if (index > 10) {
+            cy.contains("Jurusan ").should('be.visible')
+        } else {
+            cy.get("#jurusan").should('not.be.visible')
+        }
+
     }
 
     selectJenisKelamin(jenisKelamin : string){
@@ -94,6 +112,37 @@ export class BiodataPage{
         cy.get(this.txt_whatsapp).type(nomorWhatsApp, {force: true})
         cy.get(this.response_whatsapp_too_short_id).should('not.be.visible')
         cy.get(this.response_whatsapp_too_long_id).should('contain.text', this.response_whatsapp_too_long_txt).should('be.visible')
+    }
+
+    inputValidNomorWhatsApp(nomorWhatsApp: string){
+        cy.get(this.txt_whatsapp).clear()
+        cy.get(this.txt_whatsapp).type(nomorWhatsApp, {force: true})
+        cy.get(this.response_whatsapp_too_short_id).should('not.be.visible')
+        cy.get(this.response_whatsapp_too_long_id).should('not.be.visible')
+        cy.get(this.txt_whatsapp).should('have.value', nomorWhatsApp)
+    }
+
+    selectKotaDomisili(KotaDomisili : string, index: number){
+        cy.get(this.select2_container_kota_domisili).click({force:true})
+        // cy.contains(`${this.select2_result_kota_domisili} > ${this.select2_result_option}`, KotaDomisili).click()
+        cy.get('input[aria-controls="select2-kota_domisili-results"]')
+            .type(`${KotaDomisili}{enter}`, {
+                delay: 500,
+            })
+        cy.get(this.select_kota_domisili).should('have.value', index)
+    }
+    
+    selectJenisLayanan(jenisLayanan : string, index: number){
+        cy.get(`${this.select_jenis_layanan}`).focus()
+        cy.get(`${this.select_jenis_layanan}`).select(jenisLayanan)
+        cy.get(this.select_jenis_layanan).should('have.value', index)
+
+        // jika offline tampilkan pilihan cabang
+        if (index === 0) {
+            cy.contains(" Pilih Cabang ").should('be.visible')
+        } else {
+            cy.get("#cabang").should('not.be.visible')
+        }
     }
 
     loadingNotVisible(){
