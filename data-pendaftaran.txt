@@ -1,0 +1,14 @@
+menunggu text "Lanjut Step Berikutnya"
+
+untuk cancel menggunakan class ""swal2-cancel"
+
+
+step 1 berhasil di klik muncul text "Data Berhasil Tersimpan" lalu tekan tombol "ok"
+=================
+nisiy90302@pubpng.com
+7Q$9FC2V
+session transaksi_id => "VTJGc2RHVmtYMThsL3dIM3h1WnV1OHFhT1phYllyaHBwb3k4VGNVMUZhWT0"
+=================
+
+step 2 div "div_pilih_produk" show / hidden
+nama sessionya "transaksi_id"
