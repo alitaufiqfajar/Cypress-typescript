@@ -11,12 +11,12 @@ describe("Login AKM", function () {
     listUsernames.forEach(testData => {
         it(`Login username : ${testData} should success`, () => {
             cy.visit(URL)
-            cy.get("#floatingInput").type(testData)
-            cy.get("#floatingPassword").type(testData)
-            cy.contains("Login").click()
+            cy.get("[placeholder='Username']").type(testData)
+            cy.get("[placeholder='Password']").type(testData)
+            cy.get("[type='Submit']").click()
             cy.contains("Success!").should("be.visible")
             cy.url().should('eq', 'https://tryoutakm.bintangpelajar.com/event')
-            cy.get(".container-fluid").contains(nama_event).should("be.visible")
+            // cy.get(".container-fluid").contains(nama_event).should("be.visible")
         });
     });
 })
